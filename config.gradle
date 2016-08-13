@@ -1,0 +1,38 @@
+ext {
+    android = [
+            compileSdkVersion: 23,
+            buildToolVersion : "23.0.1",
+            minSdkVersion    : 16,
+            targerSdkVersion : 23,
+            versionCode      : 1,
+            versionName      : "1.0.0",
+    ]
+}
+
+ext.channelInt = { str ->
+    switch (str) {
+        case "pgy":
+            return "1";
+        case "yingyongbao":
+            return "2";
+        case "qihu360":
+            return "3";
+        case "xiaomi":
+            return "4";
+        case "baidu":
+            return "5";
+        case "wandoujia":
+            return "6";
+        case "huawei":
+            return "7";
+        case "meizu":
+            return "8";
+        case "lenovo":
+            return "9";
+        case "vivo":
+            return "10";
+        default:
+            return "0";
+    }
+
+}

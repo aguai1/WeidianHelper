@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="transport">#00000000</color>
+    <color name="colorPrimary">#f35361</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryDark">#cf4753</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorYellow">#FFFF00</color>
+    <color name="colorPink">#FF99CC</color>
+    <color name="colorBlue">#0066FF</color>
+    <color name="colorGreen">#00FF00</color>
+    <color name="colorOrange">#FF6600</color>
+
+    <color name="dig_out_btn_line_color">#d75858</color>
+
+    <color name="black_alpha_100">#041835</color>
+    <color name="black_alpha_90">#e6041835</color>
+    <color name="black_alpha_54">#8a041835</color>
+    <color name="black_alpha_36">#5c041835</color>
+    <color name="black_alpha_18">#2e041835</color>
+    <color name="black_alpha_10">#19041835</color>
+    <color name="black_alpha_6">#0f041835</color>
+
+    <color name="white_alpha_100">#ffffffff</color>
+    <color name="white_alpha_95">#f2ffffff</color>
+    <color name="white_alpha_71">#b5ffffff</color>
+    <color name="white_alpha_61">#9bffffff</color>
+    <color name="white_alpha_54">#8affffff</color>
+    <color name="white_alpha_41">#68ffffff</color>
+    <color name="white_alpha_40">#66ffffff</color>
+    <color name="white_alpha_36">#5bffffff</color>
+    <color name="white_alpha_35">#59ffffff</color>
+    <color name="white_alpha_31">#4fffffff</color>
+    <color name="white_alpha_23">#3affffff</color>
+    <color name="white_alpha_21">#35ffffff</color>
+    <color name="white_alpha_18">#2effffff</color>
+    <color name="white_alpha_12">#1fffffff</color>
+    <color name="white_alpha_6">#0fffffff</color>
+    <color name="black_no_alpha_36">#a4acb6</color>
+    <color name="black_no_alpha_10">#e5e5e5</color>
+
+</resources>

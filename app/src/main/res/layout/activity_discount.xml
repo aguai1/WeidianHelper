@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<include layout="@layout/activity_opcomment"/>
+	<LinearLayout
+		android:id="@+id/opmain"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:orientation="vertical"
+		android:background="#c5c5c5">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="折扣："
+				android:layout_marginLeft="20dp"/>
+			<Spinner
+				android:id="@+id/spinner_discountnum"
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="40dp"
+				/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="结束时间："
+				android:layout_marginLeft="20dp"/>
+			<TextView
+				android:id="@+id/spinner_discounttime"
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="40dp"
+				android:gravity="center"
+				/>
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:background="?attr/colorPrimary"
+			>
+			<Button
+				android:id="@+id/btn_op"
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:text="操作"
+				android:textColor="#fff"
+				android:background="#22000000"/>
+			<Button
+				android:id="@+id/btn_lookalldiscount"
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:text="查看所有折扣信息"
+				android:textColor="#fff"
+				android:background="#22000000"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">微店管家</string>
+    <string name="exit">退出</string>
+    <string name="about">关于</string>
+    <string name="help">帮助</string>
+    <string name="add_imp_text">增加关键字</string>
+    <string name="zhekou">批量折扣</string>
+    <string name="modify_price">修改价格及库存</string>
+    <string name="more_delete">批量删除</string>
+    <string name="tuiguang">推广</string>
+    <string name="secret">输入secret</string>
+    <string name="appkey">输入AppKey</string>
+    <string name="loading_default_msg">正在加载请稍后</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="zaycexit">再按一次退出微店管家</string>
+    <string name="discount">批量折扣</string>
+    <string name="sales">销量：</string>
+    <string name="inventory">库存：</string>
+    <string name="price">价格：</string>
+    <string name="done_loading_hint">已经全部加载完成</string>
+    <string name="next">下一步</string>
+    <string name="select_goods">选择商品</string>
+    <string name="action_select_all">全选</string>
+    <string name="delete_discount">删除折扣</string>
+    <string name="originPrice">原价：</string>
+    <string name="finalPrice">折后价：</string>
+</resources>

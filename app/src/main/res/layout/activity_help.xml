@@ -1,0 +1,64 @@
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/drawer_layout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	>
+	<include layout="@layout/actionbar_layout"/>
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_margin="20dp"
+		android:layout_below="@+id/toolbar_lay"
+		>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="20dp"
+			android:textSize="20dp"
+			android:gravity="center_horizontal"
+			android:text="微店管家"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="20dp"
+			android:text="申明：微店管家app是一款完全免费的软件，不在使用过程中收取任何费用，用户如若在使用中遇到问题可联系开发者QQ：885697461，下面是app使用的简单教程"/>
+
+	</LinearLayout>
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="220dp">
+		<android.support.v7.widget.CardView
+			android:layout_width="match_parent"
+			android:layout_height="1000dp"
+			app:cardCornerRadius="4dp"
+			app:cardElevation="4dp"
+			android:layout_margin="15dp">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="1:获取appKey和secret：
+	   打开浏览器输入以下地址：http://open.weidian.com/index进入微店开放平台；首先登陆，然后点击管理—创建应用—自用型点创建—填写资料创建完毕！"/>
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="2:登陆微店管家：
+	   在刚才创建好应用之后，在微店开发者平台点击管理，会看到您刚才创建的应用，点击查看详情如下图所示,复制appKey和secret登陆微店管家app就可以使用啦！O(∩_∩)O谢谢"/>
+				<ImageView
+					android:layout_width="match_parent"
+					android:layout_height="200dp"
+					android:src="@mipmap/jiaocheng"
+					android:layout_marginTop="10dp"/>
+			</LinearLayout>
+		</android.support.v7.widget.CardView>
+	</ScrollView>
+
+</RelativeLayout>

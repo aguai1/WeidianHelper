@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<include layout="@layout/activity_opcomment"/>
+	<LinearLayout
+		android:id="@+id/opmain"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:orientation="vertical"
+		android:background="#c5c5c5">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="替换关键字： 将"/>
+			<EditText
+				android:id="@+id/et_ortext"
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="替换为："/>
+			<EditText
+				android:id="@+id/et_finaltext"
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="前面增加关键字："/>
+			<EditText
+				android:id="@+id/et_newtext"
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:background="?attr/colorPrimary"
+			>
+			<Button
+				android:id="@+id/btn_look"
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:text="预览"
+				android:textColor="#fff"
+				android:background="#22000000"/>
+			<Button
+				android:id="@+id/btn_op"
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:text="增加/替换"
+				android:textColor="#fff"
+				android:background="#22000000"/>
+		</LinearLayout>
+
+	</LinearLayout>
+
+</RelativeLayout>
