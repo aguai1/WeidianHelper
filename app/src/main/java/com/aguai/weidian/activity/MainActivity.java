@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity implements NativeAD.NativeAdListe
         if (nativeAD == null) {
             this.nativeAD = new NativeAD(this, GdtConstants.APPID, GdtConstants.MainActivityBannerPosID, this);
         }
-        int count = 12; // 一次拉取的广告条数：范围1-30
+        int count = 25; // 一次拉取的广告条数：范围1-30
         nativeAD.loadAD(count);
     }
     private void initActionBar() {

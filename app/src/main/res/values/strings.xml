@@ -25,4 +25,5 @@
     <string name="delete_discount">删除折扣</string>
     <string name="originPrice">原价：</string>
     <string name="finalPrice">折后价：</string>
+    <string name="more_discount_delete">所有折扣商品</string>
 </resources>

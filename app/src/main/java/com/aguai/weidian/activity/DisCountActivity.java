@@ -1,5 +1,6 @@
 package com.aguai.weidian.activity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,18 +8,23 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.aguai.weidian.MyApplication;
 import com.aguai.weidian.adpter.GoodsAdapter;
 import com.aguai.weidian.adpter.ProgressAdapter;
 import com.aguai.weidian.lifelogic.repositories.GoodsRepo;
+import com.aguai.weidian.lifelogic.repositories.net.GoodsNet;
 import com.aguai.weidian.utils.GdtConstants;
 import com.aguai.weidian.utils.ToastUtils;
 import com.aguai.weidian.utils.UrlConstants;
@@ -28,7 +34,10 @@ import com.qq.e.ads.banner.ADSize;
 import com.qq.e.ads.banner.AbstractBannerADListener;
 import com.qq.e.ads.banner.BannerView;
 import com.trello.rxlifecycle.ActivityEvent;
+import com.weidian.open.sdk.exception.OpenException;
+import com.weidian.open.sdk.request.discount.VdianSeckillItemSetRequest;
 import com.weidian.open.sdk.request.product.VdianItemListGetRequest;
+import com.weidian.open.sdk.response.discount.DiscountOpResponse;
 import com.weidian.open.sdk.response.product.VdianItemListGetResponse;
 
 import java.util.ArrayList;
@@ -37,9 +46,12 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -50,18 +62,24 @@ public  class DisCountActivity extends BaseActivity{
 	@Bind(R.id.refreshlay)SwipeRefreshLayout swipeRefreshLayout;
 	@Bind(R.id.recycler)RecyclerView recyclerView;
 	@Bind(R.id.ballview)BallView ballView;
+	@Bind(R.id.tv_discounttime)TextView tv_discounttime;
 	@Bind(R.id.bannerContainer) ViewGroup bannerContainer;
 	BannerView bv;
 	@Bind(R.id.spinner_discountnum) Spinner spinner_discountnum;
-//	@Bind(R.id.spinner_discounttime) Spinner spinner_discounttime;
 	private GoodsRepo goodsRepo;
+	private GoodsNet goodnet;
 	private VdianItemListGetRequest vdianItemListGetRequest;
+	private VdianSeckillItemSetRequest vdianSeckillItemSetRequest;
 	private GoodsAdapter addTextAdapter;
 	private List<VdianItemListGetResponse.ListItem> list;
 	private int currentpage=1;
 	private boolean isSucceed=false;
 	private boolean isSelectAll=false;
-
+	private int allOpNum;
+	private int currentOpNum;
+	private int year,month,day,hour,minute,sec;
+	private String endTime;
+	private String startTime;
 	@Override
 	public int bindLayout() {
 		return R.layout.activity_discount;
@@ -92,8 +110,7 @@ public  class DisCountActivity extends BaseActivity{
 		});
 	}
 	private  final Integer op[]={1,2,3,4,5,6,7,8,9};
-//	private  final String time[]={"1月","2月","3月","4月",5,6,7,8,9};
-	private int currentNum=1;
+	private int currentDiscountNum=1;
 	private void initSpinner() {
 		ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, op);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -103,7 +120,7 @@ public  class DisCountActivity extends BaseActivity{
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				currentNum=op[position];
+				currentDiscountNum=op[position];
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
@@ -115,6 +132,7 @@ public  class DisCountActivity extends BaseActivity{
 	@Override
 	public void doBusiness(Context mContext) {
 		goodsRepo=new GoodsRepo();
+		goodnet=new GoodsNet(goodsRepo);
 		if(MyApplication.getInstance().getAccessToken()==null){
 			Intent intent =  new Intent(DisCountActivity.this, LoginActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
@@ -122,10 +140,23 @@ public  class DisCountActivity extends BaseActivity{
 			startActivity(intent);
 			return;
 		}
+		vdianSeckillItemSetRequest=new VdianSeckillItemSetRequest(MyApplication.getInstance().getAccessToken());
 		vdianItemListGetRequest=new VdianItemListGetRequest(MyApplication.getInstance().getAccessToken());
 		getGoods();
 		initBanner();
 		bv.loadAD();
+
+		Time time = new Time("GMT+8");
+		time.setToNow();
+		 year = time.year;
+		 month = time.month;
+		 day = time.monthDay;
+		 minute = time.minute;
+		 hour = time.hour;
+		 sec = time.second+15;
+		startTime=year+"-"+month+"-"+day+" 00:00:00";
+		endTime=year+"-"+(month+1)+"-"+day+" 00:00:00";
+		tv_discounttime.setText(endTime.substring(0,endTime.length()-9));
 	}
 	private void getGoods() {
 		Subscription s =  goodsRepo.getVdianItemListGet(vdianItemListGetRequest, UrlConstants.pagenum, currentpage)
@@ -209,16 +240,79 @@ public  class DisCountActivity extends BaseActivity{
 			});
 		}
 	}
-	@OnClick({R.id.btn_op,R.id.btn_lookalldiscount})
+	@OnClick({R.id.btn_op,R.id.btn_lookalldiscount,R.id.tv_discounttime})
 	public void OnClick(View view){
 		switch (view.getId()){
 			case R.id.btn_op:
+				opList();
 				break;
 			case R.id.btn_lookalldiscount:
 				startActivity(new Intent(DisCountActivity.this,AllDisCountActivity.class));
 				break;
+			case R.id.tv_discounttime:
+				DatePickerDialog datePickerDialog=new DatePickerDialog(DisCountActivity.this, new DatePickerDialog.OnDateSetListener() {
+					@Override
+					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+						endTime=year+"-"+monthOfYear+"-"+dayOfMonth+" 00:00:00";
+						tv_discounttime.setText(endTime.substring(0,endTime.length()-9));
+					}
+				},year,month,day);
+				datePickerDialog.show();
+				break;
 
 		}
+	}
+
+	private void opList() {
+		List<VdianItemListGetResponse.ListItem> selectedItems = addTextAdapter.getSelectedItems();
+		allOpNum=selectedItems.size();
+		currentOpNum=0;
+		loadingDialog.setMsg("删除进度0/"+allOpNum);
+		loadingDialog.show();
+		discount(selectedItems);
+	}
+
+	private void discount(List<VdianItemListGetResponse.ListItem> selectedItems) {
+		Observable.from(selectedItems)
+				.map(new Func1<VdianItemListGetResponse.ListItem, DiscountOpResponse>() {
+					@Override
+					public DiscountOpResponse call(VdianItemListGetResponse.ListItem listItem) {
+						DiscountOpResponse profile = null;
+						try {
+							listItem.setPrice(Double.parseDouble(listItem.getPrice())*currentDiscountNum/10+"");
+							profile = goodnet.vdianSeckillItemSet(vdianSeckillItemSetRequest,listItem.getItemId(),listItem.getPrice(),endTime,startTime,"100");
+						} catch (OpenException e) {
+							e.printStackTrace();
+						}
+						return profile;
+					}
+				})
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.compose(this.<DiscountOpResponse>bindUntilEvent(ActivityEvent.DESTROY))
+				.subscribe(new Subscriber<DiscountOpResponse>() {
+					@Override
+					public void onCompleted() {
+						loadingDialog.dismiss();
+						showCommentActivity();
+					}
+
+					@Override
+					public void onError(Throwable e) {
+						loadingDialog.dismiss();
+						addTextAdapter.notifyDataChanged();
+					}
+					@Override
+					public void onNext(DiscountOpResponse commonResponse) {
+						if(commonResponse!=null) {
+							if(commonResponse.getStatus().getStatusCode()==0){
+								currentOpNum++;
+								loadingDialog.setMsg("设置折扣进度"+currentOpNum+"/"+allOpNum);
+							}
+							addTextAdapter.notifyDataChanged();
+						}
+					}
+				});
 	}
 
 }

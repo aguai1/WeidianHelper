@@ -3,6 +3,7 @@ package com.aguai.weidian.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.res.TypedArray;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -13,7 +14,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import com.aguai.weidian.db.SharedPreferencesHelper;
 import com.aguai.weidian.umdata.AnalysisService;
+import com.aguai.weidian.utils.MarketUtils;
+import com.aguai.weidian.utils.SharedPreferencesUtils;
 import com.aguai.weidian.utils.ToastUtils;
 import com.aguai.weidian.views.dialog.AlertDialog;
 import com.aguai.weidian.views.dialog.LoadingDialog;
@@ -22,6 +26,7 @@ import com.google.gson.JsonSyntaxException;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import rx.Subscription;
@@ -92,6 +97,18 @@ public abstract class BaseActivity extends RxAppCompatActivity implements
 	public void onPause() {
 		super.onPause();
 		AnalysisService.onPause(this);
+	}
+
+
+	public void showCommentActivity() {
+		if(!SharedPreferencesHelper.getInstance().getIsComment(getBaseContext())){
+			ArrayList<String> strings = MarketUtils.queryInstalledMarketPkgs(this);
+			ArrayList<String> strings1 = MarketUtils.filterInstalledPkgs(getBaseContext(), strings);
+			if(strings1.size()>0) {
+				MarketUtils.launchAppDetail(this, this.getPackageName(), strings1.get(0));
+				SharedPreferencesHelper.getInstance().setIsComment(getBaseContext(),true);
+			}
+		}
 	}
 
 	@Override

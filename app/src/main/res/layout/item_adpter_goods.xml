@@ -25,7 +25,6 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/ic_launcher"
                 android:layout_margin="5dp"
                 />
             <TextView

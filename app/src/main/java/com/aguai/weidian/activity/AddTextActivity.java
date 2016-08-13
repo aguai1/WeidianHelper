@@ -7,8 +7,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.aguai.weidian.MyApplication;
@@ -16,10 +19,14 @@ import com.aguai.weidian.adpter.GoodsAdapter;
 import com.aguai.weidian.adpter.ProgressAdapter;
 import com.aguai.weidian.lifelogic.repositories.GoodsRepo;
 import com.aguai.weidian.lifelogic.repositories.net.GoodsNet;
+import com.aguai.weidian.utils.GdtConstants;
 import com.aguai.weidian.utils.ToastUtils;
 import com.aguai.weidian.utils.UrlConstants;
 import com.example.testzjut.R;
 import com.github.glomadrian.loadingballs.BallView;
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
 import com.trello.rxlifecycle.ActivityEvent;
 import com.weidian.open.sdk.exception.OpenException;
 import com.weidian.open.sdk.request.product.VdianItemListGetRequest;
@@ -52,7 +59,9 @@ public  class AddTextActivity extends BaseActivity{
 	@Bind(R.id.et_newtext)EditText et_newtext;
 	@Bind(R.id.et_ortext)EditText et_ortext;
 	@Bind(R.id.et_finaltext)EditText et_finaltext;
-
+	@Bind(R.id.bannerContainer)
+	ViewGroup bannerContainer;
+	BannerView bv;
 
 	private GoodsRepo goodsRepo;
 	private GoodsNet goodsNet;
@@ -73,6 +82,8 @@ public  class AddTextActivity extends BaseActivity{
 	@Override
 	public void initView(View view) {
 		initActionBar();
+		initBanner();
+		bv.loadAD();
 		list=new ArrayList<>();
 		recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
 		addTextAdapter=new GoodsAdapter(AddTextActivity.this,list,recyclerView);
@@ -93,7 +104,23 @@ public  class AddTextActivity extends BaseActivity{
 			}
 		});
 	}
+	private void initBanner() {
+		this.bv = new BannerView(this, ADSize.BANNER, GdtConstants.APPID, GdtConstants.AddTextActivityBannerPosID);
+		bv.setRefresh(30);
+		bv.setADListener(new AbstractBannerADListener() {
 
+			@Override
+			public void onNoAD(int arg0) {
+				Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
+			}
+
+			@Override
+			public void onADReceiv() {
+				Log.i("AD_DEMO", "ONBannerReceive");
+			}
+		});
+		bannerContainer.addView(bv);
+	}
 	@Override
 	public void doBusiness(Context mContext) {
 		goodsRepo=new GoodsRepo();
@@ -187,6 +214,9 @@ public  class AddTextActivity extends BaseActivity{
 	}
 
 	private void opItems() {
+		if(isEmpty()){
+			return;
+		}
 		List<VdianItemListGetResponse.ListItem> selectedItems = addTextAdapter.getSelectedItems();
 		allOpNum=selectedItems.size();
 		currentOpNum=0;
@@ -214,6 +244,7 @@ public  class AddTextActivity extends BaseActivity{
 				.subscribe(new Subscriber<CommonItemResponse>() {
 					@Override
 					public void onCompleted() {
+						showCommentActivity();
 						loadingDialog.dismiss();
 					}
 
@@ -235,7 +266,18 @@ public  class AddTextActivity extends BaseActivity{
 				});
 	}
 
+	private boolean isEmpty() {
+		if(TextUtils.isEmpty(et_finaltext.getText().toString())&&TextUtils.isEmpty(et_ortext.getText().toString())&&TextUtils.isEmpty(et_newtext.getText().toString())){
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 	private void getNewInfo() {
+		if(isEmpty()){
+			return;
+		}
 		List<VdianItemListGetResponse.ListItem> selectedItems = addTextAdapter.getSelectedItems();
 		for (VdianItemListGetResponse.ListItem listItem:selectedItems){
 			listItem.setFinalItemName(listItem.getItemName().replaceAll(et_ortext.getText().toString(),et_finaltext.getText().toString()));

@@ -230,6 +230,7 @@ public  class DeleteActivity extends BaseActivity{
 				@Override
 				public void onCompleted() {
 					loadingDialog.dismiss();
+					showCommentActivity();
 				}
 
 				@Override

@@ -8,8 +8,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -20,10 +22,14 @@ import com.aguai.weidian.adpter.GoodsAdapter;
 import com.aguai.weidian.adpter.ProgressAdapter;
 import com.aguai.weidian.lifelogic.repositories.GoodsRepo;
 import com.aguai.weidian.lifelogic.repositories.net.GoodsNet;
+import com.aguai.weidian.utils.GdtConstants;
 import com.aguai.weidian.utils.ToastUtils;
 import com.aguai.weidian.utils.UrlConstants;
 import com.example.testzjut.R;
 import com.github.glomadrian.loadingballs.BallView;
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
 import com.trello.rxlifecycle.ActivityEvent;
 import com.weidian.open.sdk.exception.OpenException;
 import com.weidian.open.sdk.request.product.VdianItemListGetRequest;
@@ -59,6 +65,11 @@ public  class ModifyInfoActivity extends BaseActivity{
 
 	@Bind(R.id.et_pricerite)EditText et_price;
 	@Bind(R.id.et_stock)EditText et_stock;
+
+	@Bind(R.id.bannerContainer)
+	ViewGroup bannerContainer;
+	BannerView bv;
+
 	private GoodsRepo goodsRepo;
 	private GoodsNet goodsNet;
 	private VdianItemListGetRequest vdianItemListGetRequest;
@@ -81,6 +92,8 @@ public  class ModifyInfoActivity extends BaseActivity{
 	@Override
 	public void initView(View view) {
 		initActionBar();
+		initBanner();
+		bv.loadAD();
 		initSpinner();
 		list=new ArrayList<>();
 		recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
@@ -102,7 +115,23 @@ public  class ModifyInfoActivity extends BaseActivity{
 			}
 		});
 	}
+	private void initBanner() {
+		this.bv = new BannerView(this, ADSize.BANNER, GdtConstants.APPID, GdtConstants.MotifyActivityBannerPosID);
+		bv.setRefresh(30);
+		bv.setADListener(new AbstractBannerADListener() {
 
+			@Override
+			public void onNoAD(int arg0) {
+				Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
+			}
+
+			@Override
+			public void onADReceiv() {
+				Log.i("AD_DEMO", "ONBannerReceive");
+			}
+		});
+		bannerContainer.addView(bv);
+	}
 	private void initSpinner() {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, op);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -228,6 +257,9 @@ public  class ModifyInfoActivity extends BaseActivity{
 	}
 
 	private void opLook() {
+		if (isEmpty()){
+			return;
+		}
 		List<VdianItemListGetResponse.ListItem> selectedItems = addTextAdapter.getSelectedItems();
 		for (VdianItemListGetResponse.ListItem listItem:selectedItems){
 			opFinalNum(listItem);
@@ -236,6 +268,9 @@ public  class ModifyInfoActivity extends BaseActivity{
 	}
 
 	private void opItems() {
+		if (isEmpty()){
+			return;
+		}
 		List<VdianItemListGetResponse.ListItem> selectedItems = addTextAdapter.getSelectedItems();
 		allOpNum=selectedItems.size();
 		currentOpNum=0;
@@ -263,6 +298,7 @@ public  class ModifyInfoActivity extends BaseActivity{
 					@Override
 					public void onCompleted() {
 						loadingDialog.dismiss();
+						showCommentActivity();
 					}
 
 					@Override
@@ -353,5 +389,11 @@ public  class ModifyInfoActivity extends BaseActivity{
 			}
 		}
 	}
-
+	private boolean isEmpty() {
+		if(TextUtils.isEmpty(et_price.getText().toString())&&TextUtils.isEmpty(et_stock.getText().toString())){
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

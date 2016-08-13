@@ -27,21 +27,42 @@
             android:layout_margin="10dp"
            >
             <android.support.v7.widget.CardView
-                android:id="@+id/addtext"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 app:cardCornerRadius="4dp"
                 android:layout_weight="1"
                 app:cardElevation="6dp"
                 >
-                <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_imp_text"/>
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:mrl_rippleOverlay="true"
+                    app:mrl_rippleColor="#ccc"
+                    >
+                    <LinearLayout
+                        android:id="@+id/addtext"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/sm_edit"
+                            />
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_imp_text"/>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
+
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
-                android:id="@+id/discount"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 app:cardCornerRadius="4dp"
@@ -49,11 +70,34 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 >
-                <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/zhekou"/>
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    app:mrl_rippleOverlay="true"
+                    app:mrl_rippleColor="#ccc"
+                    >
+                    <LinearLayout
+                        android:id="@+id/discount"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/zhekou"
+                            />
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/zhekou"/>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
+
             </android.support.v7.widget.CardView>
         </LinearLayout>
 
@@ -65,21 +109,41 @@
             android:layout_margin="10dp"
            >
             <android.support.v7.widget.CardView
-                android:id="@+id/modifyinfo"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 app:cardCornerRadius="4dp"
                 android:layout_weight="1"
                 app:cardElevation="6dp"
                 >
-                <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/modify_price"/>
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:mrl_rippleOverlay="true"
+                    app:mrl_rippleColor="#ccc"
+                    >
+                    <LinearLayout
+                        android:id="@+id/modifyinfo"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/discount"
+                            />
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/modify_price"/>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
-                android:id="@+id/delete"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 app:cardCornerRadius="4dp"
@@ -87,11 +151,33 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 >
-                <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/more_delete"/>
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:mrl_rippleOverlay="true"
+                    app:mrl_rippleColor="#ccc"
+                    >
+                    <LinearLayout
+                        android:id="@+id/delete"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/delete"
+                            />
+                        <TextView
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/more_delete"/>
+                    </LinearLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </LinearLayout>

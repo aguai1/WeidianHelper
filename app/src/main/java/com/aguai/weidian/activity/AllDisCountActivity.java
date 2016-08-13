@@ -181,7 +181,7 @@ public  class AllDisCountActivity extends BaseActivity{
 	}
 	private void initActionBar() {
 		if (toolbar != null) {
-			toolbar.setTitle(getString(R.string.discount));
+			toolbar.setTitle(getString(R.string.more_discount_delete));
 			toolbar.inflateMenu(R.menu.menu_select_goods);
 			toolbar.setNavigationIcon(R.mipmap.ic_back);
 			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -241,6 +241,7 @@ public  class AllDisCountActivity extends BaseActivity{
 					@Override
 					public void onCompleted() {
 						loadingDialog.dismiss();
+						showCommentActivity();
 					}
 
 					@Override

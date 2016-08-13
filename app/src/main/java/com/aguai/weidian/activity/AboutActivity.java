@@ -8,21 +8,15 @@ import android.content.res.TypedArray;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-
-import com.aguai.weidian.umdata.AnalysisService;
+import android.view.ViewGroup;
+import com.aguai.weidian.utils.GdtConstants;
 import com.example.testzjut.R;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
 import butterknife.Bind;
-import butterknife.ButterKnife;
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  *关于
@@ -30,6 +24,9 @@ import rx.subscriptions.CompositeSubscription;
 public  class AboutActivity extends BaseActivity{
 
     @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.bannerContainer)
+    ViewGroup bannerContainer;
+    BannerView bv;
     @Override
     public int bindLayout() {
         return R.layout.activity_about;
@@ -38,8 +35,26 @@ public  class AboutActivity extends BaseActivity{
     @Override
     public void initView(View view) {
         initActionBar();
+        initBanner();
+        bv.loadAD();
     }
+    private void initBanner() {
+        this.bv = new BannerView(this, ADSize.BANNER, GdtConstants.APPID, GdtConstants.AboutActivityBannerPosID);
+        bv.setRefresh(30);
+        bv.setADListener(new AbstractBannerADListener() {
 
+            @Override
+            public void onNoAD(int arg0) {
+                Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
+            }
+
+            @Override
+            public void onADReceiv() {
+                Log.i("AD_DEMO", "ONBannerReceive");
+            }
+        });
+        bannerContainer.addView(bv);
+    }
     @Override
     public void doBusiness(Context mContext) {
 

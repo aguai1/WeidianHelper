@@ -21,9 +21,22 @@ public class GdtConstants {
      * */
     public static final String DeleteActivityBannerPosID = "7080219388250862";
     /**
+     * 增加文字页面
+     * */
+    public static final String AddTextActivityBannerPosID = "6050913481582749";
+
+    /**
+     * 微店管家修改库存价格
+     * */
+    public static final String MotifyActivityBannerPosID = "7060316431387860";
+    /**
      * 微店管家折扣页
      * */
     public static final String DisCountActivityBannerPosID = "2020916328950840";
+    /**
+     * 微店管家关于页
+     * */
+    public static final String AboutActivityBannerPosID = "6010512411383801";
 
     /**
      * 开屏
