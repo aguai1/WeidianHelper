@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class SystemConfig {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(SystemConfig.class);
 
   public static final String ENC_UTF8 = "utf-8";
 
@@ -59,7 +56,6 @@ public class SystemConfig {
       HTTP_CONNECTION_TIMEOUT = empty2Default(prop.getProperty("http_connection_timeout"), HTTP_CONNECTION_TIMEOUT);
       HTTP_READ_TIMEOUT = empty2Default(prop.getProperty("http_read_timeout"), HTTP_READ_TIMEOUT);
     } catch (Exception e) {
-      LOGGER.error("SystemConfig init error", e);
     } finally {
       if (in != null) {
         try {

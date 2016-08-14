@@ -7,6 +7,9 @@ public class GdtConstants {
     /** 应用墙
     * */
     public static final String APPWallPosID = "4060217401785633";
+    /** 推广
+     * */
+    public static final String TuiGuangPosID = "3060719432410136";
     /**
      * 主页展示
     * */

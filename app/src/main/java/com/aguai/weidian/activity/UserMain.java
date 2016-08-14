@@ -23,16 +23,15 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements NativeAD.NativeAdListener{
+public class UserMain extends BaseActivity implements NativeAD.NativeAdListener{
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.gdt_main)RelativeLayout gdt_main;
     @Bind(R.id.player_view)PlayerView playerView;
     private NativeAD nativeAD;
-    private long mExitTime;
 
     @Override
     public int bindLayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_usermain;
     }
 
     @Override
@@ -45,58 +44,35 @@ public class MainActivity extends BaseActivity implements NativeAD.NativeAdListe
         loadAD();
     }
 
-
     @Override
     public void initPrame(Bundle bundle) {
 
     }
     public void loadAD() {
         if (nativeAD == null) {
-            this.nativeAD = new NativeAD(this, GdtConstants.APPID, GdtConstants.MainActivityBannerPosID, this);
+            this.nativeAD = new NativeAD(this, GdtConstants.APPID, GdtConstants.TuiGuangPosID, this);
         }
         int count = 25; // 一次拉取的广告条数：范围1-30
         nativeAD.loadAD(count);
     }
     private void initActionBar() {
         if (toolbar != null) {
-            toolbar.setTitle(getString(R.string.app_name));
-            toolbar.inflateMenu(R.menu.menu_homepage);
-            toolbar.setNavigationIcon(R.mipmap.icon_account);
+            toolbar.setTitle("推广");
+            toolbar.setNavigationIcon(R.mipmap.ic_back);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    APPWall wall = new APPWall(MainActivity.this, GdtConstants.APPID, GdtConstants.APPWallPosID);
-//                    wall.setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//                    wall.doShowAppWall();
-                    startActivity(new Intent(MainActivity.this,UserMain.class));
-                }
-            });
-            toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    Intent intent=new Intent();
-                    switch (item.getItemId()){
-                        case R.id.action_about:
-                            intent.setClass(MainActivity.this,AboutActivity.class);
-                            break;
-                        case R.id.action_exit:
-                            finish();
-                            return true;
-                        case R.id.action_help:
-                            intent.setClass(MainActivity.this,HelpActivity.class);
-                            break;
-                    }
-                    startActivity(intent);
-                    return false;
+                   finish();
                 }
             });
         }
     }
 
+
     @Override
     public void onResume() {
-        loadAD();
         super.onResume();
+        loadAD();
         if ( playerView != null
                 && !playerView.isPlaying()) {
             playerView.startPlayer();
@@ -110,37 +86,6 @@ public class MainActivity extends BaseActivity implements NativeAD.NativeAdListe
         }
     }
 
-    @OnClick({R.id.addtext,R.id.modifyinfo,R.id.delete,R.id.discount})
-    public void onClick(View view){
-        Intent intent=new Intent();
-        switch (view.getId()){
-            case R.id.addtext:
-                intent.setClass(MainActivity.this,AddTextActivity.class);
-                break;
-            case R.id.modifyinfo:
-                intent.setClass(MainActivity.this,ModifyInfoActivity.class);
-                break;
-            case R.id.delete:
-                intent.setClass(MainActivity.this,DeleteActivity.class);
-                break;
-            case R.id.discount:
-                intent.setClass(MainActivity.this,DisCountActivity.class);
-                break;
-        }
-        startActivity(intent);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if((System.currentTimeMillis() - mExitTime) > 2000) {
-            ToastUtils.showShort(getString(R.string.zaycexit));
-            mExitTime = System.currentTimeMillis();
-            return;
-        } else {
-            finish();
-        }
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -148,7 +93,6 @@ public class MainActivity extends BaseActivity implements NativeAD.NativeAdListe
             playerView.destroyPlayer();
         }
     }
-
 
     @Override
     public void onADLoaded(List<NativeADDataRef> list) {

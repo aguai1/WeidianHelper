@@ -1,6 +1,5 @@
 package com.weidian.open.sdk.response.discount;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.weidian.open.sdk.entity.DiscountItem;
 import com.weidian.open.sdk.response.AbstractResponse;
 

@@ -31,6 +31,7 @@
         <activity android:name="com.aguai.weidian.activity.DeleteActivity"/>
         <activity android:name="com.aguai.weidian.activity.AddTextActivity"/>
         <activity android:name="com.aguai.weidian.activity.AllDisCountActivity"/>
+        <activity android:name="com.aguai.weidian.activity.UserMain"/>
         <!--=================================广点通==================-->
         <!-- 声明SDK所需要的组件 -->
         <service

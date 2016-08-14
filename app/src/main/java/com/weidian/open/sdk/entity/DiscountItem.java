@@ -1,7 +1,5 @@
 package com.weidian.open.sdk.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class DiscountItem {
   private String itemid;
 //缩略图
