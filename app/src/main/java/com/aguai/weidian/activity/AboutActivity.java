@@ -24,9 +24,7 @@ import butterknife.Bind;
 public  class AboutActivity extends BaseActivity{
 
     @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.bannerContainer)
-    ViewGroup bannerContainer;
-    BannerView bv;
+
     @Override
     public int bindLayout() {
         return R.layout.activity_about;
@@ -35,26 +33,8 @@ public  class AboutActivity extends BaseActivity{
     @Override
     public void initView(View view) {
         initActionBar();
-        initBanner();
-        bv.loadAD();
     }
-    private void initBanner() {
-        this.bv = new BannerView(this, ADSize.BANNER, GdtConstants.APPID, GdtConstants.AboutActivityBannerPosID);
-        bv.setRefresh(30);
-        bv.setADListener(new AbstractBannerADListener() {
 
-            @Override
-            public void onNoAD(int arg0) {
-                Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
-            }
-
-            @Override
-            public void onADReceiv() {
-                Log.i("AD_DEMO", "ONBannerReceive");
-            }
-        });
-        bannerContainer.addView(bv);
-    }
     @Override
     public void doBusiness(Context mContext) {
 

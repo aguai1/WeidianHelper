@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import com.aguai.weidian.umdata.AnalysisService;
 import com.example.testzjut.R;
@@ -29,7 +31,8 @@ public  class HelpActivity extends BaseActivity{
 
 	@Bind(R.id.toolbar)
 	Toolbar toolbar;
-
+	@Bind(R.id.webview)
+	WebView webView;
 	@Override
 	public int bindLayout() {
 		return R.layout.activity_help;
@@ -38,6 +41,9 @@ public  class HelpActivity extends BaseActivity{
 	@Override
 	public void initView(View view) {
 		initActionBar();
+		WebSettings webSettings = webView.getSettings();
+		webSettings.setJavaScriptEnabled(true);
+		webView.loadUrl("file:///android_asset/help.html");
 	}
 
 	@Override

@@ -101,6 +101,7 @@ public class MainActivity extends BaseActivity implements NativeAD.NativeAdListe
                 && !playerView.isPlaying()) {
             playerView.startPlayer();
         }
+
     }
     @Override
     public void onStop() {
@@ -148,7 +149,6 @@ public class MainActivity extends BaseActivity implements NativeAD.NativeAdListe
             playerView.destroyPlayer();
         }
     }
-
 
     @Override
     public void onADLoaded(List<NativeADDataRef> list) {

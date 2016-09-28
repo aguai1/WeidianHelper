@@ -28,6 +28,7 @@ public class UserMain extends BaseActivity implements NativeAD.NativeAdListener{
     @Bind(R.id.gdt_main)RelativeLayout gdt_main;
     @Bind(R.id.player_view)PlayerView playerView;
     private NativeAD nativeAD;
+    private List<NativeADDataRef> addList;
 
     @Override
     public int bindLayout() {
@@ -96,6 +97,7 @@ public class UserMain extends BaseActivity implements NativeAD.NativeAdListener{
 
     @Override
     public void onADLoaded(List<NativeADDataRef> list) {
+        this.addList=list;
         if(playerView!=null){
             playerView.setPlayerAdapter(new CardPlayerAdapter(getBaseContext(), list, new CardPlayerAdapter.OnClickListener() {
                 @Override
@@ -106,8 +108,16 @@ public class UserMain extends BaseActivity implements NativeAD.NativeAdListener{
             playerView.notifyPlayerDataChange(true);
             playerView.startPlayer();
         }
-
     }
+
+    @Override
+    public void onBackPressed() {
+        if(addList!=null&&addList.size()>0){
+            addList.get(0).onClicked(playerView);
+        }
+        super.onBackPressed();
+    }
+
     @Override
     public void onNoAD(int i) {
 

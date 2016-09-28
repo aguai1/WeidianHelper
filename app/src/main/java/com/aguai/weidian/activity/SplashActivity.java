@@ -62,7 +62,7 @@ public class SplashActivity extends Activity implements SplashADListener {
 	public void onNoAD(int errorCode) {
 		Log.i("AD_DEMO", "LoadSplashADFail, eCode=" + errorCode);
 		/** 如果加载广告失败，则直接跳转 */
-		this.startActivity(new Intent(this, LoginActivity.class));
+		this.startActivity(new Intent(this, MainActivity.class));
 		this.finish();
 	}
 
@@ -72,7 +72,7 @@ public class SplashActivity extends Activity implements SplashADListener {
 	 */
 	private void next() {
 		if (canJump) {
-			this.startActivity(new Intent(this, LoginActivity.class));
+			this.startActivity(new Intent(this, MainActivity.class));
 			this.finish();
 		} else {
 			canJump = true;

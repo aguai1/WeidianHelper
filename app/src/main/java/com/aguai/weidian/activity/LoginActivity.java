@@ -6,26 +6,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-
 import com.aguai.weidian.MyApplication;
 import com.aguai.weidian.db.SharedPreferencesHelper;
 import com.aguai.weidian.lifelogic.repositories.TokenRepo;
 import com.aguai.weidian.lifelogic.repositories.entities.TokenInfo;
 import com.aguai.weidian.utils.ToastUtils;
-import com.aguai.weidian.views.dialog.LoadingDialog;
 import com.example.testzjut.R;
 import com.trello.rxlifecycle.ActivityEvent;
-import com.trello.rxlifecycle.FragmentEvent;
-import com.weidian.open.sdk.exception.OpenException;
-import com.weidian.open.sdk.oauth.OAuth;
-import com.weidian.open.sdk.response.oauth.OAuthResponse;
-import com.weidian.open.sdk.util.SystemConfig;
-
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.OnClick;
 import rx.Subscription;

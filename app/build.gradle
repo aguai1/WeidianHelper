@@ -8,7 +8,7 @@ android {
         javaMaxHeapSize "2048M"
     }
     defaultConfig {
-        resConfigs"zh"
+        resConfigs "zh"
         applicationId "com.example.testzjut"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
@@ -18,14 +18,14 @@ android {
         multiDexEnabled true
 //      配置环境:测试和线上环境
         manifestPlaceholders = [
-                APPLICATION_ID  : applicationId,
-                CHANNEL_ID_INT  : "1",
+                APPLICATION_ID     : applicationId,
+                CHANNEL_ID_INT     : "1",
                 UMENG_CHANNEL_VALUE: name,
-                GETUI_APP_ID : "bRw6a4EOOo58zHYGSxcpL4",
-                GETUI_APP_KEY : "utGjcYfOz58m4xWdSBZvKA",
-                BAIDU_APP_KEY : "QLTjKVHGz5SdaSnXmhGNFhNWTyDnm1MG",
-                GETUI_APP_SECRET : "tKRCGlltmW5nbgOR5nevh",
-                PACKAGE_NAME : applicationId
+                GETUI_APP_ID       : "bRw6a4EOOo58zHYGSxcpL4",
+                GETUI_APP_KEY      : "utGjcYfOz58m4xWdSBZvKA",
+                BAIDU_APP_KEY      : "QLTjKVHGz5SdaSnXmhGNFhNWTyDnm1MG",
+                GETUI_APP_SECRET   : "tKRCGlltmW5nbgOR5nevh",
+                PACKAGE_NAME       : applicationId
         ]
     }
     signingConfigs {
@@ -43,6 +43,7 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
         }
     }
     productFlavors {
@@ -56,24 +57,24 @@ android {
         wandoujia {}
         google {}
         oppo {}
-        lenovo{}
-        vivo{}
+        lenovo {}
+        vivo {}
         productFlavors.all { flavor ->
             if (!name.equals("pgy")) {
                 flavor.manifestPlaceholders = [
                         UMENG_CHANNEL_VALUE: name
                 ]
             } else {
-                applicationId "com.aguai.life.test"
+                applicationId "com.aguai.wedianhelper"
                 flavor.manifestPlaceholders = [
                         APPLICATION_ID     : applicationId,
                         UMENG_CHANNEL_VALUE: name,
                         CHANNEL_ID_INT     : channelInt(name),
-                        BAIDU_APP_KEY : "QLTjKVHGz5SdaSnXmhGNFhNWTyDnm1MG",
-                        GETUI_APP_ID : "bRw6a4EOOo58zHYGSxcpL4",
-                        GETUI_APP_KEY : "utGjcYfOz58m4xWdSBZvKA",
-                        GETUI_APP_SECRET : "tKRCGlltmW5nbgOR5nevh",
-                        PACKAGE_NAME : applicationId
+                        BAIDU_APP_KEY      : "QLTjKVHGz5SdaSnXmhGNFhNWTyDnm1MG",
+                        GETUI_APP_ID       : "bRw6a4EOOo58zHYGSxcpL4",
+                        GETUI_APP_KEY      : "utGjcYfOz58m4xWdSBZvKA",
+                        GETUI_APP_SECRET   : "tKRCGlltmW5nbgOR5nevh",
+                        PACKAGE_NAME       : applicationId
                 ]
             }
         }
@@ -102,17 +103,17 @@ android {
         }
     }
 //    加个配置，忽略文件的
-    packagingOptions{
-        exclude'META-INF/DEPENDENCIES.txt'
-        exclude'META-INF/LICENSE.txt'
-        exclude'META-INF/NOTICE.txt'
-        exclude'META-INF/NOTICE'
-        exclude'META-INF/LICENSE'
-        exclude'META-INF/DEPENDENCIES'
-        exclude'META-INF/notice.txt'
-        exclude'META-INF/license.txt'
-        exclude'META-INF/dependencies.txt'
-        exclude'META-INF/LGPL2.1'
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
     }
 
 }

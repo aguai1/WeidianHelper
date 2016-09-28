@@ -7,87 +7,12 @@
 	android:orientation="vertical"
 	>
 	<include layout="@layout/actionbar_layout"/>
-	<ScrollView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+
+
+	<WebView
 		android:layout_below="@+id/toolbar_lay"
-		>
-		<android.support.v7.widget.CardView
-			android:layout_width="match_parent"
-			android:layout_height="1000dp"
-			app:cardCornerRadius="4dp"
-			app:cardElevation="4dp"
-			android:layout_margin="5dp"
-			>
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical"
-				android:layout_margin="10dp">
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="20dp"
-					android:textSize="20dp"
-					android:gravity="center_horizontal"
-					android:text="微店管家"/>
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="20dp"
-					android:text="申明：微店管家app是一款完全免费的软件，在使用过程中不收取任何费用，用户如若在使用中遇到问题可联系开发者，下面是app使用的简单教程"/>
-				<TextView
-					android:layout_marginTop="10dp"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="1:获取appKey和secret：打开浏览器输入以下地址：http://open.weidian.com/index进入微店开放平台；首先登陆，然后点击管理—创建应用—自用型—创建—填写资料—创建完毕！"/>
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="2:登陆微店管家：在刚才创建好应用之后，在微店开发者平台点击管理，会看到您刚才创建的应用，点击查看详情如下图所示,复制appKey和secret登陆微店管家app就可以使用啦！O(∩_∩)O谢谢"/>
-				<ImageView
-					android:layout_width="match_parent"
-					android:layout_height="200dp"
-					android:src="@mipmap/jiaocheng"
-					android:layout_marginTop="10dp"/>
-				<TextView
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:textSize="18dp"
-					android:textColor="#000"
-					android:text="功能说明："/>
-
-				<TextView
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="10dp"
-					android:text="1:增加替换关键字：该功能可以增加您店铺商品的搜索量，也可以增加您的店名让店铺更加个性化"/>
-				<TextView
-					android:layout_marginTop="10dp"
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:text="2:微店管家还具有批量修改价格，批量设置折扣，批量删除折扣，批量删除商品等功能"/>
-				<TextView
-					android:layout_marginTop="10dp"
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:text="3:如果目前的功能不能满足您的需求，请不要卸载app，程序员大叔正在努力中，如果您有什么建议请发送至开发者邮箱885697461@qq.com"/>
-				<TextView
-					android:layout_marginTop="10dp"
-					android:layout_width="fill_parent"
-					android:layout_height="wrap_content"
-					android:textColor="?attr/colorPrimary"
-					android:text="注:随后将推出微店复制，批量刷单等功能！"/>
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:gravity="right"
-					android:textSize="20dp"
-					android:text="谢谢"
-					android:layout_margin="20dp"/>
-			</LinearLayout>
-		</android.support.v7.widget.CardView>
-	</ScrollView>
-
+		android:id="@+id/webview"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		/>
 </RelativeLayout>

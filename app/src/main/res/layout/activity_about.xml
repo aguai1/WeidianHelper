@@ -41,10 +41,5 @@
 				android:layout_margin="20dp"/>
 		</RelativeLayout>
 	</android.support.v7.widget.CardView>
-	<FrameLayout
-		android:id="@+id/bannerContainer"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/toolbar_lay"
-		/>
+
 </RelativeLayout>

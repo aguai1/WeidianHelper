@@ -9,11 +9,11 @@ public class GdtConstants {
     public static final String APPWallPosID = "4060217401785633";
     /** 推广
      * */
-    public static final String TuiGuangPosID = "3060719432410136";
+    public static final String TuiGuangPosID = "2060116473113511";
     /**
      * 主页展示
     * */
-    public static final String MainActivityBannerPosID = "5050019451686652";
+    public static final String MainActivityBannerPosID = "7000016433714542";
 
     /**
      * 主页插屏
